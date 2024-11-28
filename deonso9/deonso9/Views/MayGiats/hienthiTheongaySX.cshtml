@@ -1,0 +1,56 @@
+﻿@model List<deonso9.Models.MayGiat>
+
+<h2>Hiển thị danh sách máy giặt theo ngày sản xuất</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+@using (Html.BeginForm("hienthiTheongaySX", "MayGiats", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Chọn ngày sản xuất:", new { @class = "control-label" })
+        @Html.TextBox("ngaySX", null, new { @type = "date", @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Hiển thị</button>
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>Danh sách máy giặt</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Hãng SX</th>
+                <th>Ngày SX</th>
+                <th>Khối lượng giặt</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.HangSX</td>
+                    <td>@item.ngaySX.ToString("dd/MM/yyyy")</td>
+                    <td>@item.KhoiLuongGiat</td>
+                    <td>@item.DonGia.ToString("C")</td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.ThanhTien.ToString("C")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaSP }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaSP }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaSP })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không tìm thấy máy giặt nào phù hợp với ngày sản xuất đã chọn.</p>
+}
