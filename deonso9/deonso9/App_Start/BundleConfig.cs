@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace deonso9
+namespace lv1
 {
     public class BundleConfig
     {
